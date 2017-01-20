@@ -20,6 +20,11 @@ void setup() {
   serv5.attach(A5);
   serv6.attach(A6);
   serv7.attach(A7);
+  //centrar servos de las patas
+  serv0.write(90);
+  serv1.write(90);
+  serv2.write(90);
+  serv3.write(90);
 }
 
 void loop() {
@@ -29,9 +34,25 @@ void loop() {
 
 void MoverAdelante(int pasos;){
   int var1;
-  do{
-    var1++;
+  do{ //Movimiento para adelante con servos principales
+    serv0.write(180);
+    delay(200);
+    serv1.write(180);
+    delay(200);
+    serv2.write(0);
+    delay(200);
+    serv3.write(0);
+    delay(200);
+    serv0.write(90);
+    delay(50);
+    serv1.write(90);
+    delay(50);
+    serv3.write(90);
+    delay(50);
+    
+    var1++
   }while(var1 =! pasos);
+  var1 = 0;
 }
 
 void MoverAtras(int pasos1;){
