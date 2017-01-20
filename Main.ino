@@ -8,8 +8,12 @@ Servo serv4;
 Servo serv5;
 Servo serv6;
 Servo serv7;
-
-
+//Para usar sensor ultrasonido
+long tiempo;
+int disparador = B8;   // triger
+int entrada = B9;      // echo
+float distancia;
+float distancia2;
 void setup() {
   // Asiganamos los servos a las salidas del puerto "A"
   serv0.attach(A0);
@@ -28,7 +32,7 @@ void setup() {
 }
 
 void loop() {
-
+  distancia2 = SensorUS();
 }
 
 
@@ -74,6 +78,13 @@ void Centrar{
 }
 
 void SensorUS{
-  int valor;
-  return valor;
+  // activamos el sensor
+  digitalWrite(disparador, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(disparador, LOW);
+  
+  // medimos el pulso de respuesta
+  tiempo = (pulseIn(entrada, HIGH)/2);
+  distancia2 = float(tiempo * 0.0343);
+  return distancia2;
 }
