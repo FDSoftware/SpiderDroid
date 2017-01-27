@@ -11,7 +11,10 @@ Servo serv7;
 //Para usar sensor ultrasonido
 long tiempo;
 int disparador = B8;   // triger
-int entrada = B9;      // echo
+int entrada = B9;     // echo
+float X;
+float Y;
+int posicion;
 float distancia;
 float distancia2;
 void setup() {
@@ -29,10 +32,15 @@ void setup() {
   serv1.write(90);
   serv2.write(90);
   serv3.write(90);
+  posicion = 0;
 }
 
 void loop() {
-  distancia2 = SensorUS();
+  distancia2 = SensorUS
+  if (distancia2 =- 5 || distancia2 == 5)
+  {
+	  
+  }
 }
 
 
@@ -53,24 +61,55 @@ void MoverAdelante(int pasos;){
     delay(50);
     serv3.write(90);
     delay(50);
-    
+	if (posicion == 0){Y++}
+    if (posicion == 1){Y--}
+	if (posicion == 2){X--}
+	if (posicion == 3){X++}
     var1++
   }while(var1 =! pasos);
   var1 = 0;
 }
 
 void MoverAtras(int pasos1;){
+  posicion = 1;
   int var2;
   do{
+	 
+	 var2++
+	 X--
   }while(var2 != pasos1);
 }
 
-void MoverIzquierda{
-  
+void MoverIzquierda(int op){
+	posicion = 2;
+	float var3;
+   if (op == 0){
+	var3 = X;
+	X = var30 - 0.5;
+	var3 = Y;
+	Y = var3 + 0.5;
+   }else {
+	 var3 = X;
+	X = var30 - 1;
+	var3 = Y;
+	Y = var3 + 1;  
+   }
 }
 
-void MoverDerecha{
-  
+void MoverDerecha(int op2){
+	posicion = 3;
+  float var3;
+   if (op == 0){
+	var3 = X;
+	X = var30 - 0.5;
+	var3 = Y;
+	Y = var3 + 0.5;
+   }else {
+	 var3 = X;
+	X = var30 - 1;
+	var3 = Y;
+	Y = var3 + 1;  
+   }
 }
 
 void Centrar{
