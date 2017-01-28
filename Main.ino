@@ -1,4 +1,5 @@
 #include <Servo.h>
+#include <Arduino.h>
 // Declarmos todos los servos
 Servo serv0;
 Servo serv1;
@@ -59,6 +60,8 @@ void MoverAdelante(int pasos;){
     delay(50);
     serv1.write(90);
     delay(50);
+	serv2.write(90);
+	delay(50);
     serv3.write(90);
     delay(50);
 	if (posicion == 0){Y++}
@@ -74,9 +77,27 @@ void MoverAtras(int pasos1;){
   posicion = 1;
   int var2;
   do{
-	 
-	 var2++
-	 X--
+	serv3.write(180);
+    delay(200);
+    serv2.write(180);
+    delay(200);
+    serv1.write(0);
+    delay(200);
+    serv0.write(0);
+    delay(200);
+    serv3.write(90);
+    delay(50);
+    serv2.write(90);
+    delay(50);
+	serv1.write(90);
+	delay(50);
+    serv0.write(90);
+    delay(50);
+	if (posicion == 0){Y--}
+    if (posicion == 1){Y++}
+	if (posicion == 2){X++}
+	if (posicion == 3){X--}
+	var2++
   }while(var2 != pasos1);
 }
 
@@ -88,11 +109,13 @@ void MoverIzquierda(int op){
 	X = var30 - 0.5;
 	var3 = Y;
 	Y = var3 + 0.5;
+	//colocar movimiento a 45° a la izquierda
    }else {
 	 var3 = X;
 	X = var30 - 1;
 	var3 = Y;
 	Y = var3 + 1;  
+	//colocar movimiento a 90° a la derecha
    }
 }
 
@@ -104,16 +127,25 @@ void MoverDerecha(int op2){
 	X = var30 - 0.5;
 	var3 = Y;
 	Y = var3 + 0.5;
+	//colocar movimiento a 45° a la derecha
    }else {
 	 var3 = X;
 	X = var30 - 1;
 	var3 = Y;
 	Y = var3 + 1;  
-   }
+	//colocar movimiento a 90° a la derecha
+	}
 }
 
 void Centrar{
-  
+	serv0.write(90);
+	serv1.write(90);
+	serv2.write(90);
+	serv3.write(90);
+	serv4.write(45);
+	serv5.write(45);
+	serv6.write(45);
+	serv7.write(45);
 }
 
 void SensorUS{
