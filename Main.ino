@@ -89,15 +89,12 @@ void MoverAtras(int pasos1;){
     delay(50);
     serv2.write(90);
     delay(50);
-	serv1.write(90);
-	delay(50);
+	 serv1.write(90);
+	 delay(50);
     serv0.write(90);
     delay(50);
-	if (posicion == 0){Y--}
-    if (posicion == 1){Y++}
-	if (posicion == 2){X++}
-	if (posicion == 3){X--}
-	var2++
+    Y++
+	  var2++
   }while(var2 != pasos1);
 }
 
