@@ -1,8 +1,3 @@
-/*##################################################################################
-  ############ Programa creado por FDSoftware ######################################
-  ############       codereactor.xyz          ######################################
-  ##################################################################################
-*/
 #include <Servo.h>
 #include <Arduino.h>
 // Declarmos todos los servos
@@ -14,26 +9,15 @@ Servo serv4;
 Servo serv5;
 Servo serv6;
 Servo serv7;
-//variables para usar sensor ultrasonido
+//Para usar sensor ultrasonido
 long tiempo;
 int disparador = B8;   // triger
 int entrada = B9;     // echo
-float distancia;
-float distancia2;
-//variables para ubicacion
 float X;
 float Y;
-//variable para determinar la posicion del robot
 int posicion;
-//variables para guardar objetos
-float obstaculo[3][200];
-int indice1 = 0;
-int indice2 = 0;
-int var4;
-//Variables para control de bateria
-int var5 = 0;
-int var6 = 0;
-int var7 = 0;
+float distancia;
+float distancia2;
 void setup() {
   // Asiganamos los servos a las salidas del puerto "A"
   serv0.attach(A0);
@@ -50,41 +34,13 @@ void setup() {
   serv2.write(90);
   serv3.write(90);
   posicion = 0;
-  //declarar pins para control bateria
-  pinMode(B5,INPUT);
-  pinMode(B6,INPUT);
-  pinMode(B7,INPUT);
 }
 
 void loop() {
   distancia2 = SensorUS
-  var5 = digitalRead(B5);
-  var6 = digitalRead(B6);
-  var7 = digitalRead(B6);
-  
-  if(var7 == HIGH || var6 == HIGH){//cuando la bateria sea mayor al 25% rutina comun
-  
-	if (distancia2 =- 5 || distancia2 == 5)
-	{
-		//guardamos el obstaculo en el array
-		//esta mal hay que convertir la distancia del sensor de ultrasonido
-		//a cordenadas antes de guardar las coordenadas
-		//prox guardar datos en EEPROM interna / externa
-		obstaculo[indice1][indice2] = var4; //guardamos el ID del objeto
-		var4++
-		indice1++
-		obstaculo[indice1][indice2] = X; //guardamos cordenadas X del objeto
-		indice1++
-		obstaculo[indice1][indice2] = Y; //guardamos cordenadas Y del objeto
-		indice1 = 0;
-		indice2++
-		
-	}else{
-	  MoverAdelante(2);//mover adelante 2 pasos.
-	}
-  }
-  if(var5 == HIGH){
-	  //poner rutina para encontrar la estacion de carga
+  if (distancia2 =- 5 || distancia2 == 5)
+  {
+	  
   }
 }
 
