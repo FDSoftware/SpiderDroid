@@ -5,6 +5,7 @@
 */
 #include <Servo.h>
 #include <Arduino.h>
+#include <SRAM.h>
 // Declarmos todos los servos
 Servo serv0;
 Servo serv1;
@@ -16,8 +17,8 @@ Servo serv6;
 Servo serv7;
 //variables para usar sensor ultrasonido
 long tiempo;
-int disparador = B8;   // triger
-int entrada = B9;     // echo
+int disparador =  PB8;   // triger
+int entrada = PB9;     // echo
 float distancia;
 float distancia2;
 //variables para ubicacion
@@ -36,14 +37,14 @@ int var6 = 0;
 int var7 = 0;
 void setup() {
   // Asiganamos los servos a las salidas del puerto "A"
-  serv0.attach(A0);
-  serv1.attach(A1);
-  serv2.attach(A2);
-  serv3.attach(A3);
-  serv4.attach(A4);
-  serv5.attach(A5);
-  serv6.attach(A6);
-  serv7.attach(A7);
+  serv0.attach(PA0);
+  serv1.attach(PA1);
+  serv2.attach(PA2);
+  serv3.attach(PA3);
+  serv4.attach(PA4);
+  serv5.attach(PA5);
+  serv6.attach(PA6);
+  serv7.attach(PA7);
   //centrar servos de las patas
   serv0.write(90);
   serv1.write(90);
@@ -51,25 +52,25 @@ void setup() {
   serv3.write(90);
   posicion = 0;
   //declarar pins para control bateria
-  pinMode(B5,INPUT);
-  pinMode(B6,INPUT);
-  pinMode(B7,INPUT);
+  pinMode(PB5,INPUT);
+  pinMode(PB6,INPUT);
+  pinMode(PB7,INPUT);
 }
 
 void loop() {
   distancia2 = SensorUS
-  var5 = digitalRead(B5);
-  var6 = digitalRead(B6);
-  var7 = digitalRead(B6);
-  
+  var5 = digitalRead(PB5);
+  var6 = digitalRead(PB6);
+  var7 = digitalRead(PB6);
+
   if(var7 == HIGH || var6 == HIGH){//cuando la bateria sea mayor al 25% rutina comun
-  
+
 	if (distancia2 =- 5 || distancia2 == 5)
 	{
 		//guardamos el obstaculo en el array
 		//esta mal hay que convertir la distancia del sensor de ultrasonido
 		//a cordenadas antes de guardar las coordenadas
-		//prox guardar datos en EEPROM interna / externa
+		//prox guardar datos en FRAM externa
 		obstaculo[indice1][indice2] = var4; //guardamos el ID del objeto
 		var4++
 		indice1++
@@ -78,7 +79,7 @@ void loop() {
 		obstaculo[indice1][indice2] = Y; //guardamos cordenadas Y del objeto
 		indice1 = 0;
 		indice2++
-		
+
 	}else{
 	  MoverAdelante(2);//mover adelante 2 pasos.
 	}
@@ -155,7 +156,7 @@ void MoverIzquierda(int op){
 	 var3 = X;
 	X = var30 - 1;
 	var3 = Y;
-	Y = var3 + 1;  
+	Y = var3 + 1;
 	//colocar movimiento a 90° a la derecha
    }
 }
@@ -173,7 +174,7 @@ void MoverDerecha(int op2){
 	 var3 = X;
 	X = var30 - 1;
 	var3 = Y;
-	Y = var3 + 1;  
+	Y = var3 + 1;
 	//colocar movimiento a 90° a la derecha
 	}
 }
@@ -194,7 +195,7 @@ void SensorUS{
   digitalWrite(disparador, HIGH);
   delayMicroseconds(10);
   digitalWrite(disparador, LOW);
-  
+
   // medimos el pulso de respuesta
   tiempo = (pulseIn(entrada, HIGH)/2);
   distancia2 = float(tiempo * 0.0343);

@@ -1,0 +1,4 @@
+SRAMControl	KEYWORD1
+leer	KEYWORD2
+grabar	KEYWORD2
+format	KEYWORD2
