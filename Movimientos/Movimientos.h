@@ -3,30 +3,24 @@
   ############       codereactor.xyz          ######################################
   ##################################################################################
 */
-/*Libreria para control de memoria FRAM por i2c (FM24CL16)
-Funciones:
-  guarda variable en memoria
-  recupera la informacion como variable
-  borra todos los datos de la memoria
+/*
+    Libreria encargada del control de movimiento del robot
 */
-#ifndef FRAM_h
-#define FRAM_h
+#ifndef Movimientos_h
+#define Movimientos_h
 
 #include <Arduino.h>
 #include <Wire.h>
+#include <Adafruit_PWMServoDriver.h>
 
-class FRAMControl(){
+class Mov(){
 public:
-  FRAMControl();
-  void leer(int dir);
-  void  grabar(float dato, int dir);
-  void  format();
+    Mov();
+    void adelante(int pasos);
+    void atras(int pasos1);
+    void izquierda(int op);
+    void derecha(int op2);
 private:
-  int _dir;
-  float _dato;
-  int dirFRAM = 0;
-  int indice = 0;
-  int dirfinal = 0;
-};
+}
 
 #endif

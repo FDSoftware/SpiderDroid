@@ -13,34 +13,41 @@ Funciones:
 #include <Arduino.h>
 #include <FRAM.h>
 #include <Wire.h>
-int dirSRAM = 0;  // poner luego en SRAM.H
-int indice = 0;
-FRAMControl::FRAMControl(){
 
+FRAM::FRAMControl(){
+    Wire.begin();
 }
 
-void FRAMControl::leer(int dir){
+void FRAMControl::leer(int dir,int pagina){
   _dir = dir;
-  Wire.beginTransmission(dirSRAM);
+  dirfinal = dirFRAM|pagina|1; //encontrar otra manera
+  Wire.beginTransmission(dirfinal);
   Wire.send(_dir);
   Wire.endTransmission();
-  Wire.requestFrom(dirSRAM,8,true);
+  Wire.requestFrom(dirfinal,8,true);
   while(Wire.available()){
-      datoB[indice] = Wire.receive();
+      unionFB.datoF = 0.0;
+      unionFB.datoB[indice] = Wire.receive();
       indice++;
   }
   indice = 0;
+  dirfinal = 0;
+  return unionFB.datoF;
+}
+
+void FRAMControl::grabar(int dir1, int pagina1, int dato){
+      dirfinal = dirFRAM|pagina1|0;
+      Wire.beginTransmission(dirfinal);
+      Wire.send(dir1);
+      Wire.send(dato);
+      Wire.endTransmission();
+}
+
+void SRAMControl::format(){
+    //implementar luego
 }
 
 union Float_Byte{
 float datoF;
 byte  datoB[8];
 }unionFB;
-
-void FRAMControl::grabar(){
-
-}
-
-void SRAMControl::format(){
-
-}
