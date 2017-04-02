@@ -1,3 +1,3 @@
-# Spider-QuadBot-STM32-
-Programa Principal de un Robot con STM32 totalmente automata
+# SpiderDroid
+IA para robot autonomo basado en el chasis del MePed v2
 Pagina web: http://codereactor.xyz
