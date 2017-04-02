@@ -20,7 +20,7 @@ FRAM::FRAMControl(){
 
 void FRAMControl::leer(int dir,int pagina){
   _dir = dir;
-  dirfinal = dirFRAM|pagina|1; //encontrar otra manera
+  dirfinal = dirFRAM+pagina+1;
   Wire.beginTransmission(dirfinal);
   Wire.send(_dir);
   Wire.endTransmission();
@@ -36,14 +36,14 @@ void FRAMControl::leer(int dir,int pagina){
 }
 
 void FRAMControl::grabar(int dir1, int pagina1, int dato){
-      dirfinal = dirFRAM|pagina1|0;
+      dirfinal = dirFRAM+pagina1+0;
       Wire.beginTransmission(dirfinal);
       Wire.send(dir1);
       Wire.send(dato);
       Wire.endTransmission();
 }
 
-void SRAMControl::format(){
+void FRAMControl::format(){
     //implementar luego
 }
 

@@ -30,7 +30,8 @@ int var7 = 0;
 Movimientos mov();
 //iniciar libreria FRAM
 FRAMControl mem1();
-
+//variable para ciclo FRAM
+int ciclo = 0;
 void setup() {
   //centrar servos
   mov.centrar();
@@ -39,9 +40,11 @@ void setup() {
   pinMode(PB5,INPUT);
   pinMode(PB6,INPUT);
   pinMode(PB7,INPUT);
+  recuperVarFRAM();//leemos las variables de la FRAM
 }
 
 void loop() {
+  ciclo++;
   distancia2 = SensorUS
   var5 = digitalRead(PB5);
   var6 = digitalRead(PB6);
@@ -70,6 +73,10 @@ void loop() {
   }
   if(var5 == HIGH){
 	  //poner rutina para encontrar la estacion de carga
+  }
+  if(ciclo == 10){
+    ciclo = 0;
+    guardarFRAM();//hacemos copia de variables a la FRAM
   }
 }
 
@@ -130,6 +137,17 @@ void MoverDerecha(int op2){
 	}
 }
 
+guardarFRAM(){
+  for (int i = 0; i < 200; i++) {
+    mem1.grabar(i,1,obstaculo[0,i]);
+  }
+  for (int i2 = 0; i2 < 200; i2++) {
+    mem1.grabar(i,2,obstaculo[1,i2]);
+  }
+  for (int i3 = 0; i3 < 200; i3++) {
+    mem1.grabar(i,3,obstaculo[2,i3]);
+  }
+}
 void SensorUS{
   // activamos el sensor
   digitalWrite(disparador, HIGH);
